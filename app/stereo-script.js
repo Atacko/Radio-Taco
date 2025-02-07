@@ -288,3 +288,29 @@ updateSourceButton.addEventListener("click", () => {
     alert("Please enter a valid MP3 URL.");
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const themePopup = document.getElementById("theme-popup");
+  const closePopupBtn = document.getElementById("close-popup");
+  const themeButton = document.getElementById("theme-button"); // Ensure this is the button that triggers the popup
+
+  if (themeButton) {
+      themeButton.addEventListener("click", function () {
+          themePopup.style.display = "block";
+      });
+  }
+
+  if (closePopupBtn) {
+      closePopupBtn.addEventListener("click", function () {
+          themePopup.style.display = "none";
+      });
+  }
+
+  // Close the popup when clicking outside of it
+  window.addEventListener("click", function (event) {
+      if (event.target === themePopup) {
+          themePopup.style.display = "none";
+      }
+  });
+});
+
