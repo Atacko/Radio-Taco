@@ -314,3 +314,58 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const themeButtons = document.querySelectorAll(".load-theme");
+  const themeLink = document.getElementById("theme-style");
+  const resetButton = document.getElementById("reset-theme");
+
+  if (!themeLink) {
+      console.error("Theme link element (#theme-style) not found.");
+      return;
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const themeButtons = document.querySelectorAll(".load-theme");
+  const resetButton = document.getElementById("reset-theme");
+
+  // Create a new <link> element for theme switching
+  let themeLink = document.createElement("link");
+  themeLink.rel = "stylesheet";
+  themeLink.id = "theme-style";
+  document.head.appendChild(themeLink);
+
+  // Load a new theme when a button is clicked
+  themeButtons.forEach(button => {
+      button.addEventListener("click", (event) => {
+          const themeFile = event.target.closest("li").dataset.css; // Get theme file
+          if (themeFile) {
+              console.log(`Applying theme: ${themeFile}`);
+              themeLink.setAttribute("href", themeFile); // Change to new CSS file
+              localStorage.setItem("selectedTheme", themeFile); // Save theme
+          } else {
+              console.error("No theme file found in dataset.");
+          }
+      });
+  });
+
+  // Reset to default theme
+  if (resetButton) {
+      resetButton.addEventListener("click", () => {
+          console.log("Resetting to default theme.");
+          themeLink.setAttribute("href", ""); // Remove theme override
+          localStorage.removeItem("selectedTheme"); // Remove saved theme
+      });
+  } else {
+      console.error("Reset button (#reset-theme) not found.");
+  }
+
+  // Load the saved theme on page load
+  const savedTheme = localStorage.getItem("selectedTheme");
+  if (savedTheme) {
+      console.log(`Loading saved theme: ${savedTheme}`);
+      themeLink.setAttribute("href", savedTheme);
+  }
+});
+
+
