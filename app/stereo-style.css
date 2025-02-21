@@ -267,7 +267,7 @@ body, label, .stereo-header, .button-label {
 #update-source {
     padding: 10px 20px;
     font-size: 16px;
-    height: 100%; /* Match input height */
+    height: 100%;
     border: none;
     background: #00e7ff;
     color: black;
@@ -314,7 +314,7 @@ body, label, .stereo-header, .button-label {
     width: 60px;
     height: 40px;
     position: absolute;
-    right: 0; /* Pushes it to the far right */
+    right: 0;
     background: radial-gradient(circle, #642389 40%, #111 130%);
     border: 2px solid #00e7ff;
     color: #00e7ff;
@@ -335,9 +335,9 @@ body, label, .stereo-header, .button-label {
 .theme-popup {
     position: fixed;
     width: 50%;
-    max-width: 600px; /* Prevents excessive width */
+    max-width: 600px;
     height: 50%;
-    max-height: 400px; /* Prevents excessive height */
+    max-height: 400px;
     background: linear-gradient(to bottom, #222, #111);
     border: 3px solid #00e7ff;
     box-shadow: 0 0 20px #00e7ff;
@@ -389,7 +389,7 @@ body, label, .stereo-header, .button-label {
 }
 
 .theme-item:last-child {
-    border-bottom: none; /* Remove line under last item */
+    border-bottom: none;
 }
 
 .theme-item:hover {
@@ -426,7 +426,7 @@ body, label, .stereo-header, .button-label {
 
 .load-action {
     position: absolute;
-    right: 20px; /* Ensures it's not flush with the border */
+    right: 20px;
     background: #642389;
     border: 2px solid #00e7ff;
     color: white;
@@ -444,5 +444,5 @@ body, label, .stereo-header, .button-label {
 }
 
 .icon {
-    fill: white; /* Set the color of the icons */
+    fill: white;
 }

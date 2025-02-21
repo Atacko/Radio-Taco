@@ -368,4 +368,140 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Handle CSS import
+document.getElementById("import-css").addEventListener("click", () => {
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = ".css";
 
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file && file.name.endsWith(".css")) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const cssContent = e.target.result;
+
+        // Remove existing custom style if any
+        let customStyleTag = document.getElementById("custom-css");
+        if (customStyleTag) {
+          customStyleTag.remove();
+        }
+
+        // Apply the new CSS
+        customStyleTag = document.createElement("style");
+        customStyleTag.id = "custom-css";
+        customStyleTag.innerHTML = cssContent;
+        document.head.appendChild(customStyleTag);
+
+        // Save the uploaded CSS in localStorage
+        localStorage.setItem("customCSS", cssContent);
+
+        // Deactivate current theme
+        disableTheme();
+      };
+      reader.readAsText(file);
+    } else {
+      alert("Please upload a valid .css file.");
+    }
+  });
+
+  fileInput.click();
+});
+
+// Load saved custom CSS on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const savedCSS = localStorage.getItem("customCSS");
+  if (savedCSS) {
+    applyCustomCSS(savedCSS);
+  }
+
+  // Load saved theme if available
+  const savedTheme = localStorage.getItem("selectedTheme");
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  }
+});
+
+// Apply custom CSS function
+function applyCustomCSS(cssContent) {
+  let styleTag = document.getElementById("custom-css");
+  if (!styleTag) {
+    styleTag = document.createElement("style");
+    styleTag.id = "custom-css";
+    document.head.appendChild(styleTag);
+  }
+  styleTag.innerHTML = cssContent;
+}
+
+// Disable theme styles when custom CSS is applied
+function disableTheme() {
+  const themeLink = document.getElementById("theme-style");
+  if (themeLink) {
+    themeLink.setAttribute("href", "");
+    localStorage.removeItem("selectedTheme");
+  }
+}
+
+// Apply predefined theme
+function applyTheme(themeFile) {
+  let themeLink = document.getElementById("theme-style");
+  if (!themeLink) {
+    themeLink = document.createElement("link");
+    themeLink.rel = "stylesheet";
+    themeLink.id = "theme-style";
+    document.head.appendChild(themeLink);
+  }
+  themeLink.setAttribute("href", themeFile);
+  localStorage.setItem("selectedTheme", themeFile);
+
+  // Remove custom CSS temporarily
+  const customStyleTag = document.getElementById("custom-css");
+  if (customStyleTag) {
+    customStyleTag.remove();
+  }
+}
+
+// Handle theme switching
+document.querySelectorAll(".load-theme").forEach((button) => {
+  button.addEventListener("click", (event) => {
+    const themeFile = event.target.closest("li").dataset.css;
+    if (themeFile) {
+      applyTheme(themeFile);
+    }
+  });
+});
+
+// Handle reset theme
+document.getElementById("reset-theme").addEventListener("click", () => {
+  // Remove both theme and custom CSS
+  disableTheme();
+
+  const customStyleTag = document.getElementById("custom-css");
+  if (customStyleTag) {
+    customStyleTag.remove();
+  }
+  localStorage.removeItem("customCSS");
+});
+
+// Handle CSS Download
+document.getElementById("download-css").addEventListener("click", () => {
+  const customCSS = localStorage.getItem("customCSS");
+
+  if (customCSS) {
+    const blob = new Blob([customCSS], { type: "text/css" });
+    const url = URL.createObjectURL(blob);
+
+    // Create a temporary download link
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "custom.css";
+    document.body.appendChild(a);
+    a.click();
+
+    // Clean up
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } else {
+    alert("No custom CSS found to download.");
+  }
+});

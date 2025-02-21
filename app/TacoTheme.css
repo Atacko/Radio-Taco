@@ -323,7 +323,7 @@ body, label, .stereo-header, .button-label {
     width: 60px;
     height: 40px;
     position: absolute;
-    right: 0; /* Pushes it to the far right */
+    right: 0;
     background: radial-gradient(circle, #680202 40%, #111 130%);
     border: 2px solid #b39d7a;
     color: #b39d7a;
@@ -344,9 +344,9 @@ body, label, .stereo-header, .button-label {
 .theme-popup {
     position: fixed;
     width: 50%;
-    max-width: 600px; /* Prevents excessive width */
+    max-width: 600px;
     height: 50%;
-    max-height: 400px; /* Prevents excessive height */
+    max-height: 400px;
     background: linear-gradient(to bottom, #222, #111);
     border: 3px solid #b39d7a;
     box-shadow: 0 0 20px #680202;
@@ -398,7 +398,7 @@ body, label, .stereo-header, .button-label {
 }
 
 .theme-item:last-child {
-    border-bottom: none; /* Remove line under last item */
+    border-bottom: none;
 }
 
 .theme-item:hover {
@@ -435,7 +435,7 @@ body, label, .stereo-header, .button-label {
 
 .load-action {
     position: absolute;
-    right: 20px; /* Ensures it's not flush with the border */
+    right: 20px;
     background: #680202;
     border: 2px solid #b39d7a;
     color: white;
@@ -453,5 +453,5 @@ body, label, .stereo-header, .button-label {
 }
 
 .icon {
-    fill: #b39d7a; /* Set the color of the icons */
+    fill: #b39d7a;
 }
