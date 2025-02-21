@@ -368,6 +368,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+//css import
+
 // Handle CSS import
 document.getElementById("import-css").addEventListener("click", () => {
   const fileInput = document.createElement("input");
@@ -485,23 +487,5 @@ document.getElementById("reset-theme").addEventListener("click", () => {
 
 // Handle CSS Download
 document.getElementById("download-css").addEventListener("click", () => {
-  const customCSS = localStorage.getItem("customCSS");
-
-  if (customCSS) {
-    const blob = new Blob([customCSS], { type: "text/css" });
-    const url = URL.createObjectURL(blob);
-
-    // Create a temporary download link
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "custom.css";
-    document.body.appendChild(a);
-    a.click();
-
-    // Clean up
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  } else {
-    alert("No custom CSS found to download.");
-  }
+  window.open("https://github.com/Atacko/Radio-Taco/blob/main/app/custom.css", "_blank");
 });
