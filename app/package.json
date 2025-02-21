@@ -18,6 +18,9 @@
   },
   "build": {
     "appId": "com.radiotaco.app",
+    "files": [
+      "custom.css"
+    ],
     "win": {
       "target": "nsis",
       "icon": "./assets/RadioTaco.ico"
